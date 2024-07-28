@@ -7,6 +7,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QDebug>
+#include <QJsonDocument>
 
 #include "qmsgwebsocket.h"
 
@@ -16,12 +18,11 @@ public:
     Connecter(QObject *parent = nullptr);
     ~Connecter();
     void ping();
+    Authorize login(std::string username, std::string password);
 private Q_SLOTS:
     void replyFinished(QNetworkReply *rep);
 private:
-    qmsgwebsocket qmsgwebsocket_;
     QNetworkAccessManager *manager_;
-    QNetworkRequest request_;
 };
 
 #endif //CONNECTER_H

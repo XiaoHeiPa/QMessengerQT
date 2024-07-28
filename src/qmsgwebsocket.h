@@ -4,6 +4,7 @@
 
 #ifndef QMSGWEBSOCKET_H
 #define QMSGWEBSOCKET_H
+#include "Entities.h"
 
 class qmsgwebsocket {
 public:

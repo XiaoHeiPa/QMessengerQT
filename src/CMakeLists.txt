@@ -1,8 +1,8 @@
 qt_add_executable(qmsg_qt
-    main.cpp
-    mainwindow.cpp
-    connecter.cpp
-    qmsgwebsocket.cpp
+        main.cpp
+        mainwindow.cpp
+        connecter.cpp
+        qmsgwebsocket.cpp
 )
 
 target_link_libraries(qmsg_qt PRIVATE Qt6::Core Qt6::Widgets Qt6::WebSockets Qt6::Network)

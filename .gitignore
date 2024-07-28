@@ -1,1 +1,6 @@
 cmake-build-debug
+/out/build
+/.vs
+/CMakeLists.txt
+/CMakePresets.json
+/CMakeUserPresets.json

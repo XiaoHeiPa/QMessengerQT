@@ -10,6 +10,13 @@
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QCoreApplication>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "qmsgwebsocket.h"
 
@@ -20,6 +27,7 @@ public:
     ~Connecter();
     void ping();
     Authorize login(std::string username, std::string password);
+    void getFriends(QString& token);
 private Q_SLOTS:
     void replyFinished(QNetworkReply *rep);
 private:

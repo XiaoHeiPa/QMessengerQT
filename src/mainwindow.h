@@ -20,8 +20,9 @@ public:
     void sendMessage();
 private:
     QLabel *label;
-    QPushButton *connection;
+    QPushButton *connecter;
     QAction *connectAction;
+    Connecter connection;
    
 };
 

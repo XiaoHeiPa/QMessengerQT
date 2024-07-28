@@ -13,6 +13,8 @@
 QLineEdit* messageInput;
 QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
+    //Connecter connecter;
+    //Authorize authorize = connecter.login("zszf", "114514");
     auto* centralWidget = new QWidget;
     setCentralWidget(centralWidget);
 
@@ -47,6 +49,7 @@ void MainWindow::sendMessage() {
     QString message = messageInput->text();
     if (!message.isEmpty()) {
         messageDisplay->append(tr("Me: %1").arg(message));
+
         messageInput->clear();
     }
 }

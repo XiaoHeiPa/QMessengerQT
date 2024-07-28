@@ -5,7 +5,13 @@
 #include "connecter.h"
 
 #include "Entities.h"
-
+#include <QCoreApplication>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 Connecter::Connecter(QObject *parent)
     : QObject(parent), manager_(new QNetworkAccessManager(this))
 {
@@ -84,5 +90,37 @@ Authorize Connecter::login(std::string username, std::string password) {
     authorize.role = result["role"].toString();
 
     return authorize;
+}
+void Connecter::getFriends(QString& token) {
+    QUrl url("https://backend.lunarclient.top/user/friends/list");
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", ("Bearer " + token).toUtf8());
+    QNetworkReply* reply = manager_->get(request);
+    QByteArray reply_data = reply->readAll();
+    auto reply_json = QJsonDocument::fromJson(reply_data);
+    QJsonObject reply_object = reply_json.object();
+
+    QVariantMap result = reply_object.toVariantMap();
+
+    if (reply->error() == QNetworkReply::NoError) {
+        QByteArray response = reply->readAll();
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(response);
+        QJsonObject jsonObj = jsonDoc.object();
+
+        if (jsonObj["code"].toInt() == 200) {
+            QJsonArray friendsArray = jsonObj["data"].toArray();
+            for (const QJsonValue& value : friendsArray) {
+                QString friendName = value.toObject()["name"].toString();
+                qDebug() << "Friend: " << friendName.toStdString();
+            }
+        }
+        else {
+            qDebug() << "Failed to get friends: " << jsonObj["message"].toString().toStdString();
+        }
+    }
+    else {
+        qDebug() << "Network error: " << reply->errorString().toStdString();
+    }
+    reply->deleteLater();
 }
 

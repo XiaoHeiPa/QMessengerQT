@@ -10,7 +10,6 @@ set(QT_PREFIX "D:/Qt/6.8.0")
 
 set(CMAKE_PREFIX_PATH ${QT_PREFIX})
 
-add_executable(my_executable main.cpp)
 find_package(Qt6 COMPONENTS
         Core Widgets Network WebSockets
         REQUIRED)

@@ -10,19 +10,7 @@ set(QT_PREFIX "/home/zszf/Qt/6.7.2")
 set(CMAKE_PREFIX_PATH ${QT_PREFIX})
 
 find_package(Qt6 COMPONENTS
-        Core Widgets Network
+        Core Widgets Network WebSockets
         REQUIRED)
 
-add_executable(qmsg_qt main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        connecter.cpp
-        connecter.h
-        qmsgwebsocket.cpp
-        qmsgwebsocket.h)
-target_link_libraries(qmsg_qt
-        Qt::Core
-        Qt::Widgets
-        Qt::Network
-)
-
+add_subdirectory(src)

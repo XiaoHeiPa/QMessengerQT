@@ -3,17 +3,50 @@
 //
 
 #include "mainwindow.h"
-
+#include <QWidget>
+#include <QListWidget>
+#include <QTextEdit>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+QLineEdit* messageInput;
+QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
-    auto *widget = new QWidget;
-    setCentralWidget(widget);
+    auto* centralWidget = new QWidget;
+    setCentralWidget(centralWidget);
 
-    auto *layout = new QVBoxLayout;
-    layout->setContentsMargins(5, 5, 5, 5);
-    layout->addWidget(label);
-    layout->addWidget(connect);
-    widget->setLayout(layout);
-    setWindowTitle(tr("Qmsg"));
-    setMinimumSize(160, 160);
+    auto* chatListWidget = new QListWidget;
+    messageDisplay = new QTextEdit;
+    messageDisplay->setReadOnly(true);
+
+    messageInput = new QLineEdit;
+    auto* sendButton = new QPushButton(tr("Send"));
+
+    auto* inputLayout = new QHBoxLayout;
+    inputLayout->addWidget(messageInput);
+    inputLayout->addWidget(sendButton);
+
+    auto* rightLayout = new QVBoxLayout;
+    rightLayout->addWidget(messageDisplay);
+    rightLayout->addLayout(inputLayout);
+
+    auto* mainLayout = new QHBoxLayout;
+    mainLayout->addWidget(chatListWidget);
+    mainLayout->addLayout(rightLayout);
+
+    centralWidget->setLayout(mainLayout);
+
+    setWindowTitle(tr("QMessenger"));
+    setMinimumSize(680, 360);
     resize(680, 360);
+    connect(sendButton, &QPushButton::clicked, this, &MainWindow::sendMessage);
+}
+
+void MainWindow::sendMessage() {
+    QString message = messageInput->text();
+    if (!message.isEmpty()) {
+        messageDisplay->append(tr("Me: %1").arg(message));
+        messageInput->clear();
+    }
 }

@@ -8,6 +8,8 @@
 #include<QVBoxLayout>
 #include<QLabel>
 #include<QPushButton>
+#include<QLineEdit>
+#include<QTextEdit>
 
 #include "connecter.h"
 
@@ -15,10 +17,12 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
     MainWindow();
+    void sendMessage();
 private:
     QLabel *label;
-    QPushButton *connect;
+    QPushButton *connection;
     QAction *connectAction;
+   
 };
 
 #endif //MAINWINDOW_H

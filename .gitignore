@@ -1,1 +1,4 @@
 cmake-build-debug
+/.vs
+/out/build
+/.gitignore

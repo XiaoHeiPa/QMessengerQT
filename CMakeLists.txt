@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27.2)
 project(qmsg_qt)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(QT_PREFIX "/home/zszf/Qt/6.7.2")
+set(QT_PREFIX "D:/Qt/6.8.0/")
 
 set(CMAKE_PREFIX_PATH ${QT_PREFIX})
 

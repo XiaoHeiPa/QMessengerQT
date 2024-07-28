@@ -63,6 +63,7 @@ Authorize Connecter::login(std::string username, std::string password) {
 
     QByteArray reply_data = reply->readAll();
 
-    auto reply_json = QJsonDocument::from
+    auto reply_json = QJsonDocument::fromJson(reply_data);
+    // todo: parse json
 }
 

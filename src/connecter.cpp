@@ -64,6 +64,25 @@ Authorize Connecter::login(std::string username, std::string password) {
     QByteArray reply_data = reply->readAll();
 
     auto reply_json = QJsonDocument::fromJson(reply_data);
-    // todo: parse json
+
+    if(reply_json.isNull()) {
+        qDebug()<< "Failed to get Json.";
+    }if(!reply_json.isObject()) {
+        qDebug()<< "json is not a object";
+    }
+
+    QJsonObject reply_object = reply_json.object();
+
+    QVariantMap result = reply_object.toVariantMap();
+
+    Authorize authorize;
+
+    authorize.email = result["email"].toString();
+    authorize.username = result["username"].toString();
+    authorize.expire = result["expire"].toInt();
+    authorize.token = result["token"].toString();
+    authorize.role = result["role"].toString();
+
+    return authorize;
 }
 

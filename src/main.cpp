@@ -1,5 +1,4 @@
 #include <QApplication>
-#include <QTimer>
 
 #include "connecter.h"
 #include "mainwindow.h"
@@ -8,12 +7,11 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     auto *main_window = new MainWindow;
     main_window->show();
+    qDebug()<<11;
+
     Connecter connecter;
-    QTimer timer;
-    timer.setInterval(1000);
-    QObject::connect(&timer, &QTimer::timeout, [&connecter]() {
-        connecter.ping();
-    });
-    timer.start();
+    Authorize authorize = connecter.login("zszf", "114514");
+
+    qDebug()<<authorize.token;
     return QApplication::exec();
 }

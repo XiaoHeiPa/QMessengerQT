@@ -9,6 +9,7 @@
 #include <QNetworkReply>
 #include <QDebug>
 #include <QJsonDocument>
+#include <QJsonObject>
 
 #include "qmsgwebsocket.h"
 

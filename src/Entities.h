@@ -2,20 +2,15 @@
 // Created by zszf on 2024/7/28.
 //
 
-#ifndef AUTHORIZE_H
-#define AUTHORIZE_H
+#ifndef ENTITIES_H
+#define ENTITIES_H
 #include <QObject>
 
-class Authorize: public QObject {
-    Q_OBJECT
-private:
+struct Authorize {
     QString username;
-    QString role; // USER ADMIN
-    QString token;
     QString email;
-    long exprie = 0;
-
-    QString password = nullptr;
+    int expire;
+    QString token;
+    QString role;
 };
-
-#endif //AUTHORIZE_H
+#endif // ENTITIES_H

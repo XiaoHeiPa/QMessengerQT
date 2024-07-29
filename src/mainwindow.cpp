@@ -10,11 +10,19 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include "translation.h"
 QLineEdit* messageInput;
 QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
-    //Connecter connecter;
-    //Authorize authorize = connecter.login("zszf", "114514");
+    //loading translation
+    translator.currentlanguage = "zh-hans";
+    if (translator.loadTranslations("./translation")) {
+        qDebug() << "Translations loaded successfully.";
+    }
+    else {
+        qDebug() << "Failed to load translations.";
+    }
+
     auto* centralWidget = new QWidget;
     setCentralWidget(centralWidget);
 
@@ -23,7 +31,7 @@ MainWindow::MainWindow() {
     messageDisplay->setReadOnly(true);
 
     messageInput = new QLineEdit;
-    auto* sendButton = new QPushButton(tr("Send"));
+    auto* sendButton = new QPushButton(translator.translate("main.send"));
 
     auto* inputLayout = new QHBoxLayout;
     inputLayout->addWidget(messageInput);
@@ -48,7 +56,7 @@ MainWindow::MainWindow() {
 void MainWindow::sendMessage() {
     QString message = messageInput->text();
     if (!message.isEmpty()) {
-        messageDisplay->append(tr("Me: %1").arg(message));
+        messageDisplay->append(translator.translate("main.myself") + tr(":%1").arg(message));
 
         messageInput->clear();
     }

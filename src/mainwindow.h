@@ -12,18 +12,19 @@
 #include<QTextEdit>
 
 #include "connecter.h"
+#include "translation.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
     MainWindow();
     void sendMessage();
+    Translation translator;
 private:
     QLabel *label;
     QPushButton *connecter;
     QAction *connectAction;
     Connecter connection;
-   
 };
 
 #endif //MAINWINDOW_H

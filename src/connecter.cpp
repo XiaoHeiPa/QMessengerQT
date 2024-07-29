@@ -60,17 +60,19 @@ Authorize Connecter::login(std::string username, std::string password) {
     request.setRawHeader("Content-Type", "application/x-www-form-urlencoded");
 
     QNetworkReply *reply = manager_->post(request, data);
-
+    QEventLoop eventLoop;
+    connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
     if(reply->error()) {
         qDebug().noquote()<<"Login Failed";
     }
-
+  
     reply->deleteLater();
 
     QByteArray reply_data = reply->readAll();
 
     auto reply_json = QJsonDocument::fromJson(reply_data);
-
+    
     if(reply_json.isNull()) {
         qDebug()<< "Failed to get Json.";
     }if(!reply_json.isObject()) {

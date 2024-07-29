@@ -52,7 +52,7 @@ bool Translation::loadTranslations(const QString& directoryPath)
 QString Translation::translate(const QString& key) const
 {
     if (translations.contains(currentlanguage)) {
-        return translations[currentlanguage].value(key, /*QString("Translation not found")*/key);//to help me debug what was not exists
+        return translations[currentlanguage].value(key, key);
     }
     return QString("Language not supported");
 }

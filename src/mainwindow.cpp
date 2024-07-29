@@ -10,19 +10,19 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QMessageBox>
 #include "translation.h"
+
 QLineEdit* messageInput;
 QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
-    //loading translation
-    translator.currentlanguage = "zh-hans";
+    translator.setCurrentLanguage("zh-hans");
     if (translator.loadTranslations("./translation")) {
         qDebug() << "Translations loaded successfully.";
     }
     else {
-        qDebug() << "Failed to load translations.";
+        QMessageBox::warning(this,"Error","Failed to load translations.");
     }
-
     auto* centralWidget = new QWidget;
     setCentralWidget(centralWidget);
 

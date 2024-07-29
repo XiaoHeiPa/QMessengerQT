@@ -22,7 +22,6 @@ public:
     MainWindow();
     void sendMessage();
     void changeLanguage(const QString& language);
-    Translation translator;
 private:
     QLabel *label;
     QPushButton *connecter;

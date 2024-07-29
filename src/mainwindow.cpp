@@ -17,16 +17,6 @@
 QLineEdit* messageInput;
 QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
-    QLocale locale;
-    QString systemLanguage = locale.name();
-    translator.setCurrentLanguage(systemLanguage);
-    QMessageBox::information(this,"debug", systemLanguage);
-    if (translator.loadTranslations("./translation")) {
-        qDebug() << "Translations loaded successfully.";
-    }
-    else {
-        QMessageBox::warning(this,"Error","Failed to load translations.");
-    }
     auto* centralWidget = new QWidget;
     setCentralWidget(centralWidget);
 
@@ -35,7 +25,7 @@ MainWindow::MainWindow() {
     messageDisplay->setReadOnly(true);
 
     messageInput = new QLineEdit;
-    auto* sendButton = new QPushButton(translator.translate("main.send"));
+    auto* sendButton = new QPushButton(Translation::translate("main.send"));
 
     auto* inputLayout = new QHBoxLayout;
     inputLayout->addWidget(messageInput);
@@ -60,17 +50,17 @@ MainWindow::MainWindow() {
 void MainWindow::sendMessage() {
     QString message = messageInput->text();
     if (!message.isEmpty()) {
-        messageDisplay->append(translator.translate("main.myself") + tr(":%1").arg(message));
+        messageDisplay->append(Translation::translate("main.myself") + tr(":%1").arg(message));
 
         messageInput->clear();
     }
 }
 
 void MainWindow::changeLanguage(const QString& language) {
-    translator.setCurrentLanguage(language);
+    Translation::translator.setCurrentLanguage(language);
 
     QPushButton* sendButton = findChild<QPushButton*>();
     if (sendButton) {
-        sendButton->setText(translator.translate("main.send"));
+        sendButton->setText(Translation::translate("main.send"));
     }
 }

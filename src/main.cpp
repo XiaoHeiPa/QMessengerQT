@@ -5,6 +5,7 @@
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
+    Translation::initTranslation();
     auto *main_window = new MainWindow;
     main_window->show();
     //qDebug()<<11;

@@ -12,10 +12,13 @@ class Translation : public QObject
 public:
     explicit Translation(QObject* parent = nullptr);
     bool loadTranslations(const QString& directoryPath);
-    QString translate(const QString& key) const;
+    QString translatetext(const QString& key) const;
     QString currentlanguage;
     QStringList availableLanguages() const;
     void setCurrentLanguage(const QString& language);
+    static void initTranslation();
+    static Translation translator;
+    static QString translate(const QString& key);
 
 private:
     QMap<QString, QMap<QString, QString>> translations;

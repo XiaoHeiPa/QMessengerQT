@@ -3,7 +3,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
-
+#include <QMessageBox>
+Translation Translation::translator;
 Translation::Translation(QObject* parent) : QObject(parent)
 {
 }
@@ -49,7 +50,7 @@ bool Translation::loadTranslations(const QString& directoryPath)
     return true;
 }
 
-QString Translation::translate(const QString& key) const
+QString Translation::translatetext(const QString& key) const
 {
     if (translations.contains(currentlanguage)) {
         return translations[currentlanguage].value(key, key);
@@ -65,4 +66,21 @@ QStringList Translation::availableLanguages() const
 void Translation::setCurrentLanguage(const QString& language)
 {
     currentlanguage = language;
+}
+
+void Translation::initTranslation()
+{
+    QLocale locale;
+    QString systemLanguage = locale.name();
+    translator.setCurrentLanguage(systemLanguage);
+    //language should on runningDir/translation/
+    if (translator.loadTranslations("./translations")) {
+        qDebug() << "Translations loaded successfully.";
+    }
+    else {
+        qDebug() << "Translations loaded unsuccessfully.";
+    }
+}
+QString Translation::translate(const QString& key) {
+    return translator.translatetext(key);
 }

@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QLocale>
 #include <QVBoxLayout>
 #include <QMessageBox>
 #include "translation.h"
@@ -16,7 +17,10 @@
 QLineEdit* messageInput;
 QTextEdit* messageDisplay;
 MainWindow::MainWindow() {
-    translator.setCurrentLanguage("zh-hans");
+    QLocale locale;
+    QString systemLanguage = locale.name();
+    translator.setCurrentLanguage(systemLanguage);
+    QMessageBox::information(this,"debug", systemLanguage);
     if (translator.loadTranslations("./translation")) {
         qDebug() << "Translations loaded successfully.";
     }
@@ -61,6 +65,7 @@ void MainWindow::sendMessage() {
         messageInput->clear();
     }
 }
+
 void MainWindow::changeLanguage(const QString& language) {
     translator.setCurrentLanguage(language);
 

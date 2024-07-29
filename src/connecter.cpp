@@ -125,4 +125,3 @@ void Connecter::getFriends(QString& token) {
     }
     reply->deleteLater();
 }
-

@@ -61,3 +61,11 @@ void MainWindow::sendMessage() {
         messageInput->clear();
     }
 }
+void MainWindow::changeLanguage(const QString& language) {
+    translator.setCurrentLanguage(language);
+
+    QPushButton* sendButton = findChild<QPushButton*>();
+    if (sendButton) {
+        sendButton->setText(translator.translate("main.send"));
+    }
+}

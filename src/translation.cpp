@@ -56,3 +56,13 @@ QString Translation::translate(const QString& key) const
     }
     return QString("Language not supported");
 }
+
+QStringList Translation::availableLanguages() const
+{
+     return translations.keys();
+}
+
+void Translation::setCurrentLanguage(const QString& language)
+{
+    currentlanguage = language;
+}

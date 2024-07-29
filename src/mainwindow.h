@@ -10,15 +10,18 @@
 #include<QPushButton>
 #include<QLineEdit>
 #include<QTextEdit>
+#include <QComboBox>
 
 #include "connecter.h"
 #include "translation.h"
+#include <QLineEdit>
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
     MainWindow();
     void sendMessage();
+    void changeLanguage(const QString& language);
     Translation translator;
 private:
     QLabel *label;

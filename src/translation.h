@@ -14,6 +14,8 @@ public:
     bool loadTranslations(const QString& directoryPath);
     QString translate(const QString& key) const;
     QString currentlanguage;
+    QStringList availableLanguages() const;
+    void setCurrentLanguage(const QString& language);
 
 private:
     QMap<QString, QMap<QString, QString>> translations;
